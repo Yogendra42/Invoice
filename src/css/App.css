@@ -1,0 +1,18 @@
+.App {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8rem;
+}
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1390px !important;
+  }
+}
+
+.minWidth200 {
+  min-width: 200px;
+}
+
+.textstyle {
+  font-size: 1rem;
+  font-weight: 600;
+}
