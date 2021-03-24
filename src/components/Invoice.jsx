@@ -14,6 +14,7 @@ const Invoice = () => {
     );
     const [total, setTotal] = useState({totolBasicCost:0,totalDiscount:0,totalFinalBasicCost:0,totalTax:0,finalPrice:0});
 
+    // input values and calc
     const handleChange = (e,id,field) => {
         const CurrItems = items;
         const selectedItem = CurrItems[id];
@@ -27,6 +28,7 @@ const Invoice = () => {
         calcTotal();
     }
 
+    // calculate final values
     const calcTotal = () => {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
         const final = {totolBasicCost:0,totalDiscount:0,totalFinalBasicCost:0,totalTax:0,finalPrice:0};
@@ -38,6 +40,7 @@ const Invoice = () => {
         setTotal({...final});
     }
 
+    // add item
     const addItem = () => {
         setItems([...items,{
             Name:'',Rate:'',Quantity:'',BasicCost:'',Discount:'',
@@ -45,12 +48,14 @@ const Invoice = () => {
         }])
     }
 
+    // delte item
     const deleteItem = (id) => {
         const final = items.filter((item, index) => index != id)
         setItems([...final]);
         calcTotal();
     }
 
+    // validate and save invoice at database 
     const save = () => {
         if(!name){
             alert('Name field is empty');
