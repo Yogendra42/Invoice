@@ -55,6 +55,15 @@ const Invoice = () => {
         calcTotal(final);
     }
 
+    const deleteAll = () => {
+        const final = [{
+            Name:'',Rate:'',Quantity:'',BasicCost:'',Discount:'',
+            DiscountAmt:'',FinalBasicCost:'',Taxes:'',TaxAmt:'',TotalCost:'',
+        }];
+        setItems([...final]);
+        calcTotal(final);
+    }
+
     // validate and save invoice at database 
     const save = () => {
         if(!name){
@@ -68,12 +77,13 @@ const Invoice = () => {
         if(!phone){
             alert('Phone field is empty');
         }
+        const final = [];
         items.forEach((item, index) => {
-            if( !item.Name || !item.Rate || !item.Quantity || !item.Discount || !item.Taxes ){
-            alert(`Item Row ${index + 1} are empty`);
-            return;
+            if( item.Name && item.Rate && item.Quantity && item.Discount || item.Taxes ){
+                final.push(item)
         }})
-        console.log([...items]);
+        console.log([...final]);
+        
     }
 
     return(
@@ -92,6 +102,9 @@ const Invoice = () => {
                 <Input type="number" value={phone} onChange={(e) => setPhone(e.target.value)}></Input>
             </Col>
             <Col className="d-flex justify-content-end">
+                <Button color="primary" onClick={() => deleteAll() }>
+                    Delete All
+                </Button>
                 <Button color="primary" onClick={() => addItem() }>
                     Add New Item
                 </Button>
