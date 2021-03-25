@@ -25,11 +25,11 @@ const Invoice = () => {
         selectedItem.TaxAmt = (selectedItem.Taxes * selectedItem.FinalBasicCost)/100;
         selectedItem.TotalCost = selectedItem.FinalBasicCost + selectedItem.TaxAmt;
         setItems([...CurrItems]);
-        calcTotal();
+        calcTotal(CurrItems);
     }
 
     // calculate final values
-    const calcTotal = () => {
+    const calcTotal = (items) => {
         const reducer = (accumulator, currentValue) => accumulator + currentValue;
         const final = {totolBasicCost:0,totalDiscount:0,totalFinalBasicCost:0,totalTax:0,finalPrice:0};
         final.totolBasicCost = items.map(item => item.BasicCost).reduce(reducer,0);
@@ -52,7 +52,7 @@ const Invoice = () => {
     const deleteItem = (id) => {
         const final = items.filter((item, index) => index != id)
         setItems([...final]);
-        calcTotal();
+        calcTotal(final);
     }
 
     // validate and save invoice at database 
